@@ -1,0 +1,33 @@
+# Slicer output
+*.gcode
+*.gcode.3mf
+*.bgcode
+
+# Slicer scratch / cache
+.cache/
+*.cfg.bak
+BambuStudio/
+OrcaSlicer/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local env / secrets
+.env
+.env.local
+
+# Build outputs from OpenSCAD
+*.ast
+*.echo
+
+# Large raw assets (keep sources, not exports)
+assets/raw/
+*.stl.tmp
+
+# Claude workspace
+.claude/
