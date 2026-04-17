@@ -61,11 +61,16 @@ log "installing from official repos: ${PACMAN_PKGS[*]}"
 sudo pacman -S --needed --noconfirm "${PACMAN_PKGS[@]}"
 
 # ---- AUR packages ----
-# meshlab moved out of the official repos — it's AUR-only now.
+# Actual AUR/chaotic-aur package names (CachyOS ships with chaotic-aur
+# enabled, which has pre-built binaries for bambustudio-bin — paru will
+# prefer that over a from-source AUR build automatically):
+#   bambustudio-bin  (no hyphen between "bambu" and "studio")
+#   orca-slicer
+#   meshlab          (moved out of official Arch repos)
 
 AUR_PKGS=(
-  bambu-studio-bin
-  orcaslicer-bin
+  bambustudio-bin
+  orca-slicer
   meshlab
 )
 
@@ -74,26 +79,43 @@ for pkg in "${AUR_PKGS[@]}"; do
     log "$pkg already installed; skipping"
     continue
   fi
-  log "installing $pkg from AUR"
+  log "installing $pkg"
   "$AUR_HELPER" -S --needed --noconfirm "$pkg" || \
     warn "failed to install $pkg; see $AUR_HELPER output above"
 done
 
 # ---- Verify ----
+#
+# Each entry is "<label>:<candidate1>[,candidate2,...]" — we accept the
+# first candidate found on PATH. Different AUR maintainers ship these
+# under slightly different binary names.
 
 log "verifying installs"
 missing=()
-for bin in bambu-studio orca-slicer openscad freecad; do
-  if command -v "$bin" >/dev/null; then
-    printf '   %-18s %s\n' "$bin" "$(command -v "$bin")"
-  else
-    missing+=("$bin")
-  fi
+for spec in \
+    "Bambu Studio:bambu-studio,bambustudio,BambuStudio" \
+    "OrcaSlicer:orca-slicer,orcaslicer,OrcaSlicer" \
+    "OpenSCAD:openscad" \
+    "FreeCAD:freecad,FreeCAD"
+do
+  label="${spec%%:*}"
+  cands="${spec#*:}"
+  found=""
+  IFS=',' read -r -a candidates <<< "$cands"
+  for c in "${candidates[@]}"; do
+    if command -v "$c" >/dev/null; then
+      found="$(command -v "$c")"
+      printf '   %-14s %s\n' "$label" "$found"
+      break
+    fi
+  done
+  [[ -z "$found" ]] && missing+=("$label ($cands)")
 done
 
 if ((${#missing[@]})); then
   warn "not on PATH: ${missing[*]}"
-  warn "(bambu-studio-bin sometimes installs as 'bambustudio' — check 'pacman -Ql bambu-studio-bin | grep bin/')"
+  warn "If a package installed but the binary is named differently, run:"
+  warn "    pacman -Ql bambustudio-bin | grep -E 'bin/|\\.desktop\$'"
 fi
 
 # ---- Post-install notes ----
