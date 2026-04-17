@@ -13,17 +13,24 @@ Single piece, prints upright, no supports.
 | File | Purpose |
 |---|---|
 | [cylinder.scad](cylinder.scad) | Source (OpenSCAD, parametric) — edit `HEIGHT` or `DIAMETER` to re-size |
-| `cylinder.stl` | Exported mesh for the slicer (generate it, see below) |
+| [cylinder.stl](cylinder.stl) | Exported mesh (committed for convenience) |
+| [cylinder.3mf](cylinder.3mf) | 3MF bundle — drop straight into Bambu Studio |
 
-## Generate the STL
+## Drop-in print
+
+Easiest path: double-click `cylinder.3mf` — Bambu Studio opens with the
+cylinder already on the plate. Set the process profile (see below), hit
+**Slice Plate → Send**.
+
+## Regenerating from source
+
+If you tweak parameters in the `.scad`, re-export both artifacts:
 
 ```bash
 cd projects/wife-measuring-cylinder
 openscad -o cylinder.stl cylinder.scad
+openscad -o cylinder.3mf cylinder.scad
 ```
-
-That produces `cylinder.stl` next to the source. Drag it into Bambu Studio
-to slice.
 
 ## Print settings (A1, PLA)
 
