@@ -56,16 +56,17 @@ PACMAN_PKGS=(
   git
   openscad
   freecad
-  meshlab
 )
 log "installing from official repos: ${PACMAN_PKGS[*]}"
 sudo pacman -S --needed --noconfirm "${PACMAN_PKGS[@]}"
 
 # ---- AUR packages ----
+# meshlab moved out of the official repos — it's AUR-only now.
 
 AUR_PKGS=(
   bambu-studio-bin
   orcaslicer-bin
+  meshlab
 )
 
 for pkg in "${AUR_PKGS[@]}"; do
