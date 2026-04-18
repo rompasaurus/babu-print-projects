@@ -42,10 +42,8 @@ render "projects/wife-measuring-cylinder/cylinder.scad"          "cylinder"
 # Filament catch box
 render "projects/a1-filament-catch-box/catch-box.scad"           "catch-box"
 
-# Shelving
-render "projects/print-shelving/shelf-tier.scad"                 "shelf-tier"
-render "projects/print-shelving/shelf-tier-tall.scad"            "shelf-tier-tall"
-render "projects/print-shelving/shelf-top-cap.scad"              "shelf-top-cap"
+# Electronics organizer shelf
+render "projects/print-shelving/organizer.scad"                  "organizer"
 
 # Assembled showcase (bigger image)
 render "projects/print-shelving/showcase-assembled.scad"         "showcase-assembled" "1600,1200"
