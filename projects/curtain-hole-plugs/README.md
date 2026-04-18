@@ -19,10 +19,20 @@ the track.
 ## Plug Dimensions
 
 - **Body diameter:** 12.1 mm (0.2 mm per-side interference fit)
-- **Body length:** 14 mm (full depth)
+- **Body length:** 13 mm (1 mm shy of hole depth so it can drop in and twist)
 - **Cap diameter:** 16.5 mm (sits flush on the surface)
 - **Cap thickness:** 2 mm
 - **Chamfer tip:** 0.8 mm taper for easy insertion
+
+### Twist-lock tabs
+
+Two opposing side tabs (180° apart) let the plug slide in and be
+twisted to lock against the hole wall.
+
+- **Radial extension:** 2 mm beyond body surface
+- **Height:** 5 mm tall
+- **Position:** top of tab at 10 mm above body base (spans 5–10 mm)
+- **Width:** 4 mm tangential
 
 ## Files
 
@@ -36,7 +46,7 @@ the track.
 
 | Setting | Value |
 |---|---|
-| Orientation | Cap flat on bed (as authored) |
+| Orientation | Cap flat on bed (as authored) — tabs print as overhangs, short enough for bridging |
 | Layer height | 0.2 mm (Standard) |
 | Walls | 3 perimeters |
 | Infill | 100 % — small part, full solid for strength |

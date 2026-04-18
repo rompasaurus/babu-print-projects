@@ -96,7 +96,8 @@ for spec in \
     "Bambu Studio:bambu-studio,bambustudio,BambuStudio" \
     "OrcaSlicer:orca-slicer,orcaslicer,OrcaSlicer" \
     "OpenSCAD:openscad" \
-    "FreeCAD:freecad,FreeCAD"
+    "FreeCAD:freecad,FreeCAD" \
+    "Meshlab:meshlab,MeshLab"
 do
   label="${spec%%:*}"
   cands="${spec#*:}"
