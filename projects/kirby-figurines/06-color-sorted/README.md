@@ -37,9 +37,6 @@ Plan the swap sequence before starting:
 
 Exact layer numbers come from the `.3mf` in Bambu Studio's preview.
 
-## Add a local .gitignore
+## Attribution
 
-```bash
-echo '*.stl' > .gitignore
-echo '*.3mf' >> .gitignore
-```
+Original color-sorted model by **Mmm** on MakerWorld.

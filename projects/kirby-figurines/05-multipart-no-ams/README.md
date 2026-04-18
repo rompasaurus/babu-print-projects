@@ -36,9 +36,6 @@ Print each piece on its own plate, in the matching filament.
   If one part gets scaled differently, it won't fit.
 - Glue with CA (superglue) or plastic-weldable PLA cement.
 
-## Add a local .gitignore
+## Attribution
 
-```bash
-echo '*.stl' > .gitignore
-echo '*.3mf' >> .gitignore
-```
+Original multi-part model by **x4mp0** on MakerWorld.

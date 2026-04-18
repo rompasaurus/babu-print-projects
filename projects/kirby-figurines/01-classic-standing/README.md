@@ -21,12 +21,8 @@ Use the defaults in [../README.md](../README.md). Specifically:
 - Pink PLA Basic
 - ~45 min print time at 0.16 mm layers
 
-## Add a local .gitignore
+## Attribution
 
-Since Kirby STLs shouldn't be committed to the public repo, drop a
-`.gitignore` in this folder (one-liner):
-
-```bash
-echo '*.stl' > .gitignore
-echo '*.3mf' >> .gitignore
-```
+Original model by **BODY3D** on Printables, CC BY 4.0 (share freely
+with credit; no modification restriction). If you print this for
+anyone, credit the designer.

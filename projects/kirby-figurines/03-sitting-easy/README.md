@@ -20,9 +20,7 @@ supports needed.
 - No supports, no brim required — the flat base is big.
 - Seam: "Aligned, back" keeps the seam off the face.
 
-## Add a local .gitignore
+## Attribution
 
-```bash
-echo '*.stl' > .gitignore
-echo '*.3mf' >> .gitignore
-```
+Original model by **ChaosCoreTech** on Thingiverse — one of the most
+popular Kirby prints on the site.

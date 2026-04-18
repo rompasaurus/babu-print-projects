@@ -22,9 +22,7 @@ print and fun to put on a nightstand or monitor stand.
 - Supports: usually not needed for a curled pose; Bambu Studio will
   warn you if there's a steep overhang.
 
-## Add a local .gitignore
+## Attribution
 
-```bash
-echo '*.stl' > .gitignore
-echo '*.3mf' >> .gitignore
-```
+Original model by the listed Cults3D creator — check the source page
+for exact license terms (typically CC BY-NC for free Cults3D uploads).

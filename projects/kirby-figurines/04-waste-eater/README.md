@@ -30,9 +30,6 @@ Scale **up** for this one — it's meant to be functional.
 - Supports: **none** — shape is designed for it.
 - Print time: ~2–3 hours at 80 mm.
 
-## Add a local .gitignore
+## Attribution
 
-```bash
-echo '*.stl' > .gitignore
-echo '*.3mf' >> .gitignore
-```
+Original model by **BODY3D** on MakerWorld.

@@ -11,7 +11,10 @@ Each subfolder is one printable thing. Convention:
 
 | Folder | Description |
 |---|---|
-| [example-benchy/](example-benchy/) | The canonical printer torture-test; your first "real" print |
-| [wife-measuring-cylinder/](wife-measuring-cylinder/) | 6" finger-width ruler cylinder (OpenSCAD source + STL + 3MF) |
-| [kirby-figurines/](kirby-figurines/) | Six Kirby poses — curated download links (no STLs committed) |
+| [wife-measuring-cylinder/](wife-measuring-cylinder/) | 6" finger-width ruler cylinder (scad + stl + 3mf) |
+| [blob-buddy-figurines/](blob-buddy-figurines/) | Original 3-pose round-blob figurine family (scad + stl + 3mf) |
+| [electronics-storage/](electronics-storage/) | Modular 40 mm-grid bins + solder spool holder (scad + stl + 3mf) |
+| [a1-filament-catch-box/](a1-filament-catch-box/) | Desk-side catch bin for A1 filament purge/trim (scad + stl + 3mf) |
+| [kirby-figurines/](kirby-figurines/) | Six Kirby poses — hosting-site links (manual download required) |
+| [example-benchy/](example-benchy/) | The canonical printer torture-test; manual download |
 | [community-prints/](community-prints/) | Curated list of free models worth downloading |
