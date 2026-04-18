@@ -22,8 +22,8 @@ BODY_SHORT  = 1.0;    // how much shorter the body is than the hole
 
 // Locking tabs
 TAB_RAD     = 2.0;    // radial extension beyond body surface
-TAB_H       = 5.0;    // tab height (vertical)
-TAB_W       = 4.0;    // tab width (tangential / arc chord)
+TAB_H       = 3.0;    // tab height (vertical) — reduced 2 mm to fit gap
+TAB_W       = 2.0;    // tab width (tangential / arc chord) — reduced 2 mm to fit gap
 TAB_TOP     = 10.0;   // tab top edge, measured above body base
 
 // --- Derived ---

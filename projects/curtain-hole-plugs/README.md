@@ -30,9 +30,9 @@ Two opposing side tabs (180° apart) let the plug slide in and be
 twisted to lock against the hole wall.
 
 - **Radial extension:** 2 mm beyond body surface
-- **Height:** 5 mm tall
-- **Position:** top of tab at 10 mm above body base (spans 5–10 mm)
-- **Width:** 4 mm tangential
+- **Height:** 3 mm tall
+- **Position:** top of tab at 10 mm above body base (spans 7–10 mm)
+- **Width:** 2 mm tangential
 
 ## Files
 
