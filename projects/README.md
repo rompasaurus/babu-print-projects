@@ -12,5 +12,6 @@ Each subfolder is one printable thing. Convention:
 | Folder | Description |
 |---|---|
 | [example-benchy/](example-benchy/) | The canonical printer torture-test; your first "real" print |
-| [wife-measuring-cylinder/](wife-measuring-cylinder/) | 6" finger-width ruler cylinder (OpenSCAD source) |
+| [wife-measuring-cylinder/](wife-measuring-cylinder/) | 6" finger-width ruler cylinder (OpenSCAD source + STL + 3MF) |
+| [kirby-figurines/](kirby-figurines/) | Six Kirby poses — curated download links (no STLs committed) |
 | [community-prints/](community-prints/) | Curated list of free models worth downloading |
