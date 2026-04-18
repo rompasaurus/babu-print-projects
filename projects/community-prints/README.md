@@ -55,6 +55,27 @@ cd my-download
 Commit the source files + your notes in a `README.md`. Don't commit the
 site's zipped bundle — extract and keep just what you need.
 
+## Curated: electronic component storage shelves & organizers
+
+Each folder below has a README with the source link, designer credit,
+license note, and A1 print settings. Download the actual 3MFs from the
+linked page (MakerWorld needs a free account) and drop them into the
+folder before printing.
+
+| Folder | Category | What it is |
+|---|---|---|
+| [gridfinity-parametric-generator](gridfinity-parametric-generator/) | Foundation bins | MakerWorld customizer — punch out any Gridfinity bin size/depth/compartment count |
+| [ultimate-gridfinity-bins](ultimate-gridfinity-bins/) | Bin library | Ready-made themed Gridfinity bins (SMD, jumper wires, PCBs, tall parts) |
+| [rugged-drawer-system](rugged-drawer-system/) | Drawer cabinet | Stackable toolbox-style drawer chassis that holds Gridfinity bins inside — dust-proof |
+| [stackable-resistor-box](stackable-resistor-box/) | Component drawers | Classic 2019 vertically-stacking resistor/LED drawer boxes (termlimit remix) |
+| [multiboard-wall-system](multiboard-wall-system/) | Wall-mount system | Full parametric wall tile system for electronics bench walls — second-gen Gridfinity |
+| [esp32-breadboard-holder](esp32-breadboard-holder/) | Dev-board station | Dual-breadboard base sized for ESP32/Pico wide-pinout MCUs |
+
+Start point recommendation: print **one Gridfinity bin** from the
+generator first to confirm your tolerances, *then* commit to a full
+drawer or wall system. Gridfinity compatibility is the single most
+useful ecosystem lock-in to adopt — everything else slots into it.
+
 ## License hygiene
 
 If you ever share a print or a remix (print it for a friend is fine;
