@@ -10,6 +10,7 @@ install tooling, and printable project sources (OpenSCAD / STL / 3MF).
 | [docs/A1-Setup-Walkthrough.md](docs/A1-Setup-Walkthrough.md) | Unbox → first print, step-by-step |
 | [docs/Software-Installation.md](docs/Software-Installation.md) | Bambu Studio, Handy, drivers, alternatives |
 | [docs/First-Print-Guide.md](docs/First-Print-Guide.md) | Slicing + sending your first job |
+| [docs/A1-Maintenance-Guide.md](docs/A1-Maintenance-Guide.md) | Tool kit, maintenance cycle, wear parts, vendors — tuned for non-stop PETG |
 | [scripts/install.sh](scripts/install.sh) | One-shot installer (CachyOS / Arch) |
 | [projects/wife-measuring-cylinder/](projects/wife-measuring-cylinder/) | 6" finger-width ruler cylinder |
 | [projects/blob-buddy-figurines/](projects/blob-buddy-figurines/) | Original 3-pose figurine family |
