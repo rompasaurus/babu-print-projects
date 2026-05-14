@@ -1,0 +1,200 @@
+"""
+FreeCAD Macro: Pineapple Plant Garden Stake — Modular System
+
+For Emma's pineapple plant. Generates three printable parts:
+  1. Stake — tapered soil tip + twine hole, the main piece
+  2. Extension Rod — straight segment to add height if needed
+  3. Connector Sleeve — joins any two rods end-to-end
+
+All parts use a 5x3mm flat rectangular profile (stiffer per gram than round).
+
+>>> PRINT ALL PARTS STANDING UP so layer lines run along the length! <<<
+Cross-grain layers on thin stakes = snap city.
+"""
+
+import FreeCAD as App
+import Part
+
+# ─────────────────────────────────────────────────────────
+# PARAMETERS — tweak these to suit
+# ─────────────────────────────────────────────────────────
+
+# Main stake dimensions
+STAKE_LENGTH   = 310.0    # mm — total length (~31cm)
+WIDTH          = 5.0      # mm — wider face of flat rectangle
+THICKNESS      = 3.0      # mm — narrower face
+TAPER_LEN      = 20.0     # mm — tapered soil insertion tip
+TIP_SIZE       = 0.4      # mm — blunt tip flat (printability)
+
+# Twine attachment
+HOLE_FROM_TOP  = 30.0     # mm — twine hole, 3cm from top
+HOLE_DIA       = 2.5      # mm — fits soft garden twine
+NOTCH_WIDTH    = 1.5      # mm — V-notch width for twine grip
+NOTCH_DEPTH    = 1.2      # mm — V-notch depth into edge
+
+# Extension rod
+EXT_LENGTH     = 200.0    # mm — extra segment if plant grows taller
+
+# Connector sleeve (joins two rods end-to-end)
+SLEEVE_LEN     = 24.0     # mm — 12mm overlap per side
+SLEEVE_WALL    = 1.0      # mm — wall thickness
+SLEEVE_GAP     = 0.2      # mm — clearance per side for snug fit
+DIVIDER_THICK  = 1.0      # mm — center wall so rods seat evenly
+
+# Layout spacing between parts
+SPACING        = 15.0     # mm
+
+# ─────────────────────────────────────────────────────────
+# BUILD FUNCTIONS
+# ─────────────────────────────────────────────────────────
+
+def make_stake():
+    """Main stake: tapered tip + rectangular shaft + twine hole + edge notch."""
+    hw = WIDTH / 2.0
+    ht = THICKNESS / 2.0
+    ts = TIP_SIZE / 2.0
+
+    # --- Tapered soil tip (loft from tiny flat to full cross-section) ---
+    bot_wire = Part.makePolygon([
+        App.Vector(-ts, -ts, 0),
+        App.Vector( ts, -ts, 0),
+        App.Vector( ts,  ts, 0),
+        App.Vector(-ts,  ts, 0),
+        App.Vector(-ts, -ts, 0),
+    ])
+    top_wire = Part.makePolygon([
+        App.Vector(-hw, -ht, TAPER_LEN),
+        App.Vector( hw, -ht, TAPER_LEN),
+        App.Vector( hw,  ht, TAPER_LEN),
+        App.Vector(-hw,  ht, TAPER_LEN),
+        App.Vector(-hw, -ht, TAPER_LEN),
+    ])
+    taper = Part.makeLoft([bot_wire, top_wire], True, True)
+
+    # --- Main rectangular shaft ---
+    shaft_len = STAKE_LENGTH - TAPER_LEN
+    shaft = Part.makeBox(WIDTH, THICKNESS, shaft_len,
+                         App.Vector(-hw, -ht, TAPER_LEN))
+
+    stake = taper.fuse(shaft)
+
+    # --- Twine hole (through the wide face) ---
+    hole_z = STAKE_LENGTH - HOLE_FROM_TOP
+    hole = Part.makeCylinder(
+        HOLE_DIA / 2.0,
+        WIDTH + 2,
+        App.Vector(-hw - 1, 0, hole_z),
+        App.Vector(1, 0, 0)
+    )
+    stake = stake.cut(hole)
+
+    # --- V-notch on one edge for extra twine grip ---
+    # Small triangular notch on the wide face edge at same height as hole
+    notch_box = Part.makeBox(
+        NOTCH_DEPTH, NOTCH_WIDTH, NOTCH_WIDTH,
+        App.Vector(hw - NOTCH_DEPTH, -NOTCH_WIDTH / 2, hole_z - NOTCH_WIDTH / 2)
+    )
+    stake = stake.cut(notch_box)
+
+    return stake
+
+
+def make_extension():
+    """Straight extension rod, same cross-section, with twine hole near top."""
+    hw = WIDTH / 2.0
+    ht = THICKNESS / 2.0
+
+    rod = Part.makeBox(WIDTH, THICKNESS, EXT_LENGTH,
+                       App.Vector(-hw, -ht, 0))
+
+    # Twine hole near top
+    hole_z = EXT_LENGTH - HOLE_FROM_TOP
+    hole = Part.makeCylinder(
+        HOLE_DIA / 2.0,
+        WIDTH + 2,
+        App.Vector(-hw - 1, 0, hole_z),
+        App.Vector(1, 0, 0)
+    )
+    rod = rod.cut(hole)
+
+    return rod
+
+
+def make_sleeve():
+    """Connector sleeve — slides over the junction of two rods.
+    Has a thin center divider wall so each rod seats exactly half-way."""
+    # Outer dimensions
+    ow = WIDTH + 2 * (SLEEVE_GAP + SLEEVE_WALL)
+    ot = THICKNESS + 2 * (SLEEVE_GAP + SLEEVE_WALL)
+    # Inner cutout (rod + clearance)
+    iw = WIDTH + 2 * SLEEVE_GAP
+    it = THICKNESS + 2 * SLEEVE_GAP
+
+    outer = Part.makeBox(ow, ot, SLEEVE_LEN,
+                         App.Vector(-ow / 2, -ot / 2, 0))
+
+    # Cut two separate channels with a divider wall in the center
+    half = (SLEEVE_LEN - DIVIDER_THICK) / 2.0
+    # Bottom channel
+    bot_chan = Part.makeBox(iw, it, half + 1,
+                           App.Vector(-iw / 2, -it / 2, -1))
+    # Top channel
+    top_chan = Part.makeBox(iw, it, half + 1,
+                           App.Vector(-iw / 2, -it / 2, half + DIVIDER_THICK))
+
+    sleeve = outer.cut(bot_chan)
+    sleeve = sleeve.cut(top_chan)
+    return sleeve
+
+
+# ─────────────────────────────────────────────────────────
+# MAIN
+# ─────────────────────────────────────────────────────────
+
+def run():
+    doc = App.newDocument("PineappleStakeSystem")
+
+    # 1) Stake with tapered tip
+    stake = make_stake()
+    stake_obj = doc.addObject("Part::Feature", "Stake")
+    stake_obj.Shape = stake
+
+    # 2) Extension rod — offset in X
+    ext = make_extension()
+    ext.translate(App.Vector(WIDTH + SPACING, 0, 0))
+    ext_obj = doc.addObject("Part::Feature", "ExtensionRod")
+    ext_obj.Shape = ext
+
+    # 3) Connector sleeve — offset further in X
+    sleeve = make_sleeve()
+    sleeve.translate(App.Vector(2 * (WIDTH + SPACING), 0, 0))
+    sleeve_obj = doc.addObject("Part::Feature", "ConnectorSleeve")
+    sleeve_obj.Shape = sleeve
+
+    doc.recompute()
+
+    # Set nice view
+    if App.GuiUp:
+        import FreeCADGui
+        FreeCADGui.activeDocument().activeView().viewAxonometric()
+        FreeCADGui.SendMsgToActiveView("ViewFit")
+
+    # Print summary
+    App.Console.PrintMessage("\n")
+    App.Console.PrintMessage("=" * 45 + "\n")
+    App.Console.PrintMessage("  PINEAPPLE GARDEN STAKE SYSTEM\n")
+    App.Console.PrintMessage("=" * 45 + "\n")
+    App.Console.PrintMessage(f"  Stake:       {STAKE_LENGTH:.0f}mm total")
+    App.Console.PrintMessage(f" ({TAPER_LEN:.0f}mm taper tip)\n")
+    App.Console.PrintMessage(f"  Extension:   {EXT_LENGTH:.0f}mm straight rod\n")
+    App.Console.PrintMessage(f"  Sleeve:      {SLEEVE_LEN:.0f}mm connector\n")
+    App.Console.PrintMessage(f"  Profile:     {WIDTH:.0f} x {THICKNESS:.0f}mm flat rect\n")
+    App.Console.PrintMessage(f"  Twine hole:  {HOLE_DIA:.1f}mm dia,")
+    App.Console.PrintMessage(f" {HOLE_FROM_TOP:.0f}mm from top\n")
+    App.Console.PrintMessage(f"  Edge notch:  {NOTCH_WIDTH:.1f} x {NOTCH_DEPTH:.1f}mm\n")
+    App.Console.PrintMessage("-" * 45 + "\n")
+    App.Console.PrintMessage("  PRINT STANDING UP — layers along length!\n")
+    App.Console.PrintMessage("=" * 45 + "\n\n")
+
+
+run()
